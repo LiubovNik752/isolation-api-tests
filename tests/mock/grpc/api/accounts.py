@@ -2,9 +2,9 @@ from pathlib import Path
 
 from grpc.aio import ServicerContext
 
-from contracts.services.cards.cards_service_pb2_grpc import CardsServiceServicer
-from contracts.services.cards.rpc_get_card_pb2 import GetCardRequest, GetCardResponse
-from contracts.services.cards.rpc_get_cards_pb2 import GetCardsRequest, GetCardsResponse
+from contracts.services.accounts.accounts_service_pb2_grpc import AccountsServiceServicer
+from contracts.services.accounts.rpc_get_account_pb2 import GetAccountRequest, GetAccountResponse
+from contracts.services.accounts.rpc_get_accounts_pb2 import GetAccountsRequest, GetAccountsResponse
 from tests.mock.grpc.tools import get_scenario_grpc
 from tests.tools.logger import get_test_logger
 from tests.tools.mock import MockLoader
@@ -16,8 +16,8 @@ loader = MockLoader(
 )
 
 
-class AccountsMockService(CardsServiceServicer):
-    async def GetAccountsView(self, request: GetAccountsRequest, context: ServicerContext) -> GetAccountsResponse:
+class AccountsMockService(AccountsServiceServicer):
+    async def GetAccounts(self, request: GetAccountsRequest, context: ServicerContext) -> GetAccountsResponse:
         scenario = await get_scenario_grpc(context)
 
         return await loader.load_grpc(
