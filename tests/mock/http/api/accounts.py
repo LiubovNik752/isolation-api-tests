@@ -30,7 +30,7 @@ async def get_accounts_view(
     )
 
 @accounts_mock_router.get("/{account_id}", response_model=GetAccountResponseTestSchema)
-async def get_card_view(
+async def get_account_view(
     account_id: uuid.UUID,
     scenario: Scenario = Depends(get_scenario_http),
 ):

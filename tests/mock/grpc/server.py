@@ -39,6 +39,7 @@ async def serve():
             reflection.SERVICE_NAME,
             users_service_pb2.DESCRIPTOR.services_by_name['UsersService'].full_name,
             cards_service_pb2.DESCRIPTOR.services_by_name['CardsService'].full_name,
+            accounts_service_pb2.DESCRIPTOR.services_by_name['AccountsService'].full_name,
         ),
         server
     )
