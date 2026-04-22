@@ -17,7 +17,7 @@ loader = MockLoader(
 
 
 class AccountsMockService(AccountsServiceServicer):
-    async def GetAccounts(self, request: GetAccountsRequest, context: ServicerContext) -> GetAccountsResponse:
+    async def GetAccountsView(self, request: GetAccountsRequest, context: ServicerContext) -> GetAccountsResponse:
         scenario = await get_scenario_grpc(context)
 
         return await loader.load_grpc(
