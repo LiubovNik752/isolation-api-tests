@@ -17,15 +17,15 @@ loader = MockLoader(
 
 
 class AccountsMockService(AccountsServiceServicer):
-    async def GetAccountsView(self, request: GetAccountsRequest, context: ServicerContext) -> GetAccountsResponse:
+    async def GetAccounts(self, request: GetAccountsRequest, context: ServicerContext) -> GetAccountsResponse:
         scenario = await get_scenario_grpc(context)
 
         return await loader.load_grpc(
-            file=f"GetAccount/{scenario}.json",
+            file=f"GetAccounts/{scenario}.json",
             model=GetAccountsResponse
         )
 
-    async def GetAccountView(self, request: GetAccountRequest, context: ServicerContext) -> GetAccountResponse:
+    async def GetAccount(self, request: GetAccountRequest, context: ServicerContext) -> GetAccountResponse:
         scenario = await get_scenario_grpc(context)
 
         return await loader.load_grpc(
