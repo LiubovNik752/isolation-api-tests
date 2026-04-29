@@ -89,3 +89,32 @@ class HTTPTestClient:
             },
         )
 
+def build_http_test_client(
+    logger: Logger,
+    config: HTTPClientTestConfig
+) -> Client:
+    """
+    Фабрика создания httpx.Client для тестового слоя.
+
+    Это единственное место, где:
+    - применяется конфигурация HTTP-клиента,
+    - настраивается транспортный уровень,
+    - подключаются инфраструктурные event hooks.
+
+    Все API-клиенты сервисов используют именно этот Client,
+    что гарантирует единое поведение HTTP-взаимодействий
+    во всём тестовом проекте.
+    """
+    logger_event_hook = HTTPLoggerEventHook(logger=logger)
+
+    return Client(
+
+        timeout=config.timeout,
+        base_url=str(config.url),
+
+        event_hooks={
+            "request": [logger_event_hook.request],
+            "response": [logger_event_hook.response],
+        },
+    )
+
