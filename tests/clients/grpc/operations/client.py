@@ -27,14 +27,19 @@ class OperationsGRPCTestClient(GRPCTestClient):
 
     def get_operation(self, operation_id: UUID) -> GetOperationResponse:
         request = GetOperationRequest(id=str(operation_id))
-        return self.get_operation_api(request, operation_id)
+        return self.get_operation_api(request)
 
-    def get_operations(self,
+    def get_operations(
+            self,
             user_id: UUID,
             card_id: UUID | None = None,
             account_id: UUID | None = None,
-        ) -> GetOperationsResponse:
-        request = GetOperationsRequest(user_id=str(user_id), card_id=str(card_id), account_id=str(account_id))
+    ) -> GetOperationsResponse:
+        request = GetOperationsRequest(
+            user_id=str(user_id),
+            card_id=str(card_id) if card_id else None,
+            account_id=str(account_id) if account_id else None,
+        )
         return self.get_operations_api(request)
 
 
