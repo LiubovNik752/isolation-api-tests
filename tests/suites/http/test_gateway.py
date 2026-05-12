@@ -3,6 +3,7 @@ import pytest
 
 from tests.assertions.http.gateway import (
     assert_get_user_details_response_user_with_active_credit_card_account,
+    assert_get_account_details_response_user_with_active_debit_card_account,
 )
 from tests.clients.http.gateway.client import GatewayHTTPTestClient
 from tests.context.base import RequestContext
@@ -27,3 +28,15 @@ class TestGatewayHTTP:
         )
 
         assert_get_user_details_response_user_with_active_credit_card_account(response)
+
+    @allure.story(AllureStory.GET_USER_DETAILS)
+    @allure.title("[HTTP] Get user details. User with active debit card account")
+    def test_get_account_details_user_with_active_debit_card_account(
+            self,
+            gateway_http_test_client: GatewayHTTPTestClient
+    ):
+        response = gateway_http_test_client.get_account_details(
+            RequestContext(scenario=Scenario.USER_WITH_ACTIVE_DEBIT_CARD_ACCOUNT)
+        )
+
+        assert_get_account_details_response_user_with_active_debit_card_account(response)
