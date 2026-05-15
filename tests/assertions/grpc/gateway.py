@@ -89,45 +89,29 @@ def assert_get_user_details_response_user_with_active_credit_card_account(
 
 @allure.step("Check get account details response. User with active debit card account")
 def assert_get_account_details_response_user_with_active_debit_card_account(
-        actual: GetAccountDetailsResponse,
+        actual: GetUserDetailsResponse,
 ) -> None:
     logger.info("Check get account details response. User with active debit card account")
 
-    expected = GetAccountDetailsResponse(
-        details=AccountDetails(
-            account=Account(
+    expected = GetUserDetailsResponse(
+        details=UserDetails(
+            user=User(
                 id="aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeedddd",
-                type=AccountType.ACCOUNT_TYPE_DEBIT_CARD,
-                status=AccountStatus.ACCOUNT_STATUS_ACTIVE,
-                user_id="8b0e7c2a-1b6a-4e5d-9f1a-1b3f2a7c9e88",
-                balance=777.88,
+                email="anna.ivanova@example.com",
+                last_name="Иванова",
+                first_name="Анна",
+                middle_name="Алексеевна",
+                phone_number="+79005554433",
             ),
-            cards=[
-                Card(
-                    id="11111111-aaaa-4bbb-8ccc-222222222222",
-                    pin="1234",
-                    cvv="456",
-                    type=CardType.CARD_TYPE_PHYSICAL,
-                    status=CardStatus.CARD_STATUS_ACTIVE,
-                    account_id="aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeedddd",
-                    card_number="4111111111118888",
-                    card_holder="SERGEY PETROV",
-                    expiry_date=to_proto_test_date(date(2027, 12, 31)),
-                    payment_system=CardPaymentSystem.CARD_PAYMENT_SYSTEM_VISA,
-                ),
-                Card(
-                    id="33333333-dddd-4eee-8fff-444444444444",
-                    pin="9876",
-                    cvv="789",
-                    type=CardType.CARD_TYPE_PHYSICAL,
-                    status=CardStatus.CARD_STATUS_CLOSED,
-                    account_id="aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeedddd",
-                    card_number="5500000000008888",
-                    card_holder="SERGEY PETROV",
-                    expiry_date=to_proto_test_date(date(2028, 6, 30)),
-                    payment_system=CardPaymentSystem.CARD_PAYMENT_SYSTEM_MASTERCARD,
-                ),
+            accounts=[
+                Account(
+                    id="99999999-aaaa-4bbb-8ccc-000000000001",
+                    type=AccountType.ACCOUNT_TYPE_DEBIT_CARD,
+                    status=AccountStatus.ACCOUNT_STATUS_ACTIVE,
+                    user_id="3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                    balance=777.88,
+                )
             ],
         )
     )
-    assert_get_account_details_response(actual, expected)
+    assert_get_user_details_response(actual, expected)
