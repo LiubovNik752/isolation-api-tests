@@ -29,7 +29,7 @@ class TestGatewayGRPC:
 
         assert_get_user_details_response_user_with_active_credit_card_account(response)
 
-    @allure.story(AllureStory.GET_USER_DETAILS)
+    @allure.story(AllureStory.GET_ACCOUNT_DETAILS)
     @allure.title("[gRPC] Get account details. User with active debit card account")
     def test_get_account_details_user_with_active_debit_card_account(
             self,
