@@ -3,7 +3,6 @@ import allure
 from contracts.services.operations.operation_pb2 import Operation, OperationType, OperationStatus
 from contracts.services.operations.rpc_get_operations_pb2 import GetOperationsResponse
 from tests.assertions.base import assert_equal
-from tests.assertions.http.operations import assert_operation_from_event
 from tests.clients.postgres.operations.model import OperationsTestModel
 from tests.schema.operations import OperationEventTestSchema, OperationTestType, OperationTestStatus
 from tests.tools.date import to_proto_test_datetime
@@ -30,6 +29,20 @@ MAP_OPERATION_STATUS_TO_PROTO: dict[OperationTestStatus, OperationStatus] = {
     OperationTestStatus.IN_PROGRESS: OperationStatus.OPERATION_STATUS_IN_PROGRESS,
     OperationTestStatus.UNSPECIFIED: OperationStatus.OPERATION_STATUS_UNSPECIFIED,
 }
+
+
+@allure.step("Check operation from event")
+def assert_operation_from_event(actual: Operation, expected: OperationEventTestSchema) -> None:
+    logger.info("Check operation from event")
+
+    assert_equal(actual.type, MAP_OPERATION_TYPE_TO_PROTO[expected.type], "type")
+    assert_equal(actual.status, MAP_OPERATION_STATUS_TO_PROTO[expected.status], "status")
+    assert_equal(actual.amount, expected.amount, "amount")
+    assert_equal(actual.user_id, str(expected.user_id), "user_id")
+    assert_equal(actual.card_id, str(expected.card_id), "card_id")
+    assert_equal(actual.category, expected.category, "category")
+    assert_equal(actual.created_at, to_proto_test_datetime(expected.created_at), "created_at")
+    assert_equal(actual.account_id, str(expected.account_id), "account_id")
 
 
 @allure.step("Check operation from model")
