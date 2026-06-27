@@ -1,0 +1,7 @@
+INFO     OPERATIONS_KAFKA_PRODUCER_TEST_CLIENT:producer.py:55 Kafka message produced operations-service.operation-event.inbox
+INFO     OPERATIONS_KAFKA_PRODUCER_TEST_CLIENT:producer.py:72 Kafka producer flush started
+INFO     OPERATIONS_KAFKA_PRODUCER_TEST_CLIENT:producer.py:74 Kafka producer flush finished
+INFO     OPERATIONS_HTTP_TEST_CLIENT:logger_event_hook.py:26 GET http://127.0.0.1:8002/api/v1/operations?userId=93aff581-421c-4bfb-92c3-e402680cc86d - Waiting for response
+INFO     OPERATIONS_HTTP_TEST_CLIENT:logger_event_hook.py:32 GET http://127.0.0.1:8002/api/v1/operations?userId=93aff581-421c-4bfb-92c3-e402680cc86d - Status 200
+INFO     OPERATIONS_ASSERTIONS:operations.py:55 Check get operations response from events
+INFO     BASE_ASSERTIONS:base.py:13 Check that "operations count" equals to 1
