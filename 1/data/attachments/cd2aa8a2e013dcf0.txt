@@ -1,0 +1,3 @@
+INFO     GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:35 REQUEST: /contracts.services.gateway.GatewayService/GetAccountDetails
+INFO     GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:37 RESPONSE: /contracts.services.gateway.GatewayService/GetAccountDetails
+INFO     GATEWAY_ASSERTIONS:gateway.py:97 Check get account details response. User with active debit card account

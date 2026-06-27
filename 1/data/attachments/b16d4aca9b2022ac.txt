@@ -1,0 +1,22 @@
+INFO     sqlalchemy.engine.Engine:base.py:2698 BEGIN (implicit)
+INFO     sqlalchemy.engine.Engine:base.py:1842 INSERT INTO operations (id, type, status, amount, user_id, card_id, account_id, category, created_at) VALUES (%(id)s::UUID, %(type)s, %(status)s, %(amount)s, %(user_id)s::UUID, %(card_id)s::UUID, %(account_id)s::UUID, %(category)s, %(created_at)s)
+INFO     sqlalchemy.engine.Engine:base.py:1842 [cached since 0.0157s ago] {'id': UUID('bc50ada9-d80d-4491-b8e6-5a8def97f63b'), 'type': <OperationTestType.PURCHASE: 'PURCHASE'>, 'status': <OperationTestStatus.COMPLETED: 'COMPLETED'>, 'amount': 271.97, 'user_id': UUID('4da18058-7288-41ee-91a0-baf6f8b7f7d6'), 'card_id': UUID('d40fd8fd-4513-49c4-a7cc-b72aefc28f1b'), 'account_id': UUID('6ec85a4a-0dd4-4db5-b079-78667601b534'), 'category': 'water', 'created_at': datetime.datetime(2013, 2, 27, 4, 15, 39, 426566)}
+INFO     sqlalchemy.engine.Engine:base.py:1842 SELECT operations.id, operations.type, operations.status, operations.amount, operations.user_id, operations.card_id, operations.account_id, operations.category, operations.created_at 
+FROM operations 
+WHERE operations.id = %(pk_1)s::UUID
+INFO     sqlalchemy.engine.Engine:base.py:1842 [cached since 0.01314s ago] {'pk_1': UUID('bc50ada9-d80d-4491-b8e6-5a8def97f63b')}
+INFO     sqlalchemy.engine.Engine:base.py:2704 COMMIT
+INFO     OPERATIONS_GRPC_TEST_CLIENT:logger_interceptor.py:35 REQUEST: /contracts.services.operations.OperationsService/GetOperations
+INFO     OPERATIONS_GRPC_TEST_CLIENT:logger_interceptor.py:37 RESPONSE: /contracts.services.operations.OperationsService/GetOperations
+INFO     OPERATIONS_ASSERTIONS:operations.py:80 Check get operations response from models
+INFO     BASE_ASSERTIONS:base.py:13 Check that "operations count" equals to 1
+INFO     OPERATIONS_ASSERTIONS:operations.py:50 Check operation from model
+INFO     BASE_ASSERTIONS:base.py:13 Check that "id" equals to bc50ada9-d80d-4491-b8e6-5a8def97f63b
+INFO     BASE_ASSERTIONS:base.py:13 Check that "type" equals to 4
+INFO     BASE_ASSERTIONS:base.py:13 Check that "status" equals to 2
+INFO     BASE_ASSERTIONS:base.py:13 Check that "amount" equals to 271.97
+INFO     BASE_ASSERTIONS:base.py:13 Check that "user_id" equals to 4da18058-7288-41ee-91a0-baf6f8b7f7d6
+INFO     BASE_ASSERTIONS:base.py:13 Check that "card_id" equals to d40fd8fd-4513-49c4-a7cc-b72aefc28f1b
+INFO     BASE_ASSERTIONS:base.py:13 Check that "category" equals to water
+INFO     BASE_ASSERTIONS:base.py:13 Check that "created_at" equals to 2013-02-27 04:15:39
+INFO     BASE_ASSERTIONS:base.py:13 Check that "account_id" equals to 6ec85a4a-0dd4-4db5-b079-78667601b534
