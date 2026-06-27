@@ -1,8 +1,7 @@
-from datetime import date
-
 import allure
 
 from contracts.services.accounts.account_pb2 import Account, AccountStatus, AccountType
+from contracts.services.cards.card_pb2 import Card, CardPaymentSystem, CardStatus, CardType
 from contracts.services.gateway.account_details_pb2 import AccountDetails
 from contracts.services.gateway.rpc_get_account_details_pb2 import GetAccountDetailsResponse
 from contracts.services.gateway.rpc_get_user_details_pb2 import GetUserDetailsResponse
@@ -12,11 +11,7 @@ from tests.assertions.base import assert_equal
 from tests.assertions.grpc.accounts import assert_account
 from tests.assertions.grpc.cards import assert_card
 from tests.assertions.grpc.users import assert_user
-from tests.schema.accounts import AccountTestSchema
-from tests.schema.cards import CardTestSchema
 from tests.tools.logger import get_test_logger
-from tests.types.accounts import AccountTestType, AccountTestStatus
-from tests.types.cards import CardTestType, CardTestStatus, CardTestPaymentSystem
 
 logger = get_test_logger("GATEWAY_ASSERTIONS")
 
@@ -98,37 +93,37 @@ def assert_get_account_details_response_user_with_active_debit_card_account(
 
     expected = GetAccountDetailsResponse(
         details=AccountDetails(
-            account=AccountTestSchema(
-                id="99999999-aaaa-4bbb-8ccc-000000000001",
-                type=AccountTestType.DEBIT_CARD,
-                status=AccountTestStatus.ACTIVE,
+            account=Account(
+                id="aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeedddd",
+                type=AccountType.ACCOUNT_TYPE_DEBIT_CARD,
+                status=AccountStatus.ACCOUNT_STATUS_ACTIVE,
                 user_id="3fa85f64-5717-4562-b3fc-2c963f66afa6",
                 balance=777.88,
             ),
             cards=[
-                CardTestSchema(
+                Card(
                     id="11111111-aaaa-4bbb-8ccc-222222222222",
                     pin="1234",
                     cvv="456",
-                    type=CardTestType.PHYSICAL,
-                    status=CardTestStatus.ACTIVE,
+                    type=CardType.CARD_TYPE_PHYSICAL,
+                    status=CardStatus.CARD_STATUS_ACTIVE,
                     account_id="99999999-aaaa-4bbb-8ccc-000000000001",
                     card_number="4111111111111111",
-                    card_holder="IVAN PETROV",
-                    expiry_date=date(2027, 12, 31),
-                    payment_system=CardTestPaymentSystem.VISA,
+                    card_holder="SERGEY PETROV",
+                    expiry_date="2027-12-31",
+                    payment_system=CardPaymentSystem.CARD_PAYMENT_SYSTEM_VISA,
                 ),
-                CardTestSchema(
+                Card(
                     id="33333333-dddd-4eee-8fff-444444444444",
                     pin="9876",
                     cvv="789",
-                    type=CardTestType.PHYSICAL,
-                    status=CardTestStatus.ACTIVE,
+                    type=CardType.CARD_TYPE_PHYSICAL,
+                    status=CardStatus.CARD_STATUS_CLOSED,
                     account_id="99999999-aaaa-4bbb-8ccc-000000000001",
-                    card_number="5500000000000004",
-                    card_holder="IVAN PETROV",
-                    expiry_date=date(2028, 6, 30),
-                    payment_system=CardTestPaymentSystem.MASTERCARD,
+                    card_number="5500000000008888",
+                    card_holder="SERGEY PETROV",
+                    expiry_date="2028-06-30",
+                    payment_system=CardPaymentSystem.CARD_PAYMENT_SYSTEM_MASTERCARD,
                 ),
             ],
         )
